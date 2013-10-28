@@ -1,0 +1,77 @@
+#
+# Nymph level
+#
+
+LEVEL: "nymph"
+MESSAGE: "You hear sounds of nature all around you."
+ROOM: "ordinary", unlit, random, random, (12,7)
+{
+  LOOP [2] {
+    TRAP: "board", random
+    LOOP[2] { TERRAIN: random, 'T' }
+    TERRAIN: random, '{'
+  }
+  LOOP [4] {
+    OBJECT: ('(',"chest"), random
+    OBJECT: '=', random
+    OBJECT: random, random
+  }
+  LOOP [5] {
+    OBJECT: '*', random
+    MONSTER: 'n', random, hostile
+  }
+  MONSTER: ('n',"Aphrodite"), random, hostile
+}
+
+ROOM: "ordinary", random, random, random, random
+{
+  STAIR: random, up
+  TRAP: "board", random
+  TERRAIN: random, 'T'
+  TERRAIN: random, '{'
+  OBJECT: random, random
+  MONSTER: 'n', random, hostile
+}
+
+ROOM: "ordinary", random, random, random, random
+{
+  STAIR: random, down
+  TRAP: "board", random
+  TERRAIN: random, 'T'
+  TERRAIN: random, '{'
+  OBJECT: random, random
+  TRAP: random, random
+  MONSTER: 'n', random, hostile
+}
+
+ROOM: "ordinary", random, random, random, random
+{
+  TRAP: "board", random
+  LOOP[2] { TERRAIN: random, 'T' }
+  TERRAIN: random, '{'
+  OBJECT: random, random
+  OBJECT: random, random
+  MONSTER: 'n', random, hostile
+}
+
+ROOM: "ordinary", random, random, random, random
+{
+  TRAP: "board", random
+  LOOP[2] { TERRAIN: random, 'T' }
+  TERRAIN: random, '{'
+  OBJECT: random, random
+  TRAP: random, random
+  MONSTER: 'n', random, hostile
+}
+
+ROOM: "ordinary", random, random, random, random
+{
+  TRAP: "board", random
+  LOOP[2] { TERRAIN: random, 'T' }
+  TERRAIN: random, '{'
+  OBJECT: random, random
+  TRAP: random, random
+  MONSTER: 'n', random, hostile
+}
+
+RANDOM_CORRIDORS

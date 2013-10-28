@@ -1,0 +1,134 @@
+UnNitroHack
+===========
+
+UnNitroHack is an experimental merge of two modern NetHack variants: NitroHack
+and UnNetHack.
+
+It combines NitroHack's...
+
+    - new terminal interface
+      * persistent inventory and message windows
+      * HP and power bars
+      * Unicode and layered tiles
+    - dungeon overview
+    - full key remapping
+    - fine-grained autopickup rules
+    - saved in-game options
+    - multiple saved in-progress games
+    - game replays and dump logs
+    - interface-agnostic network play
+
+... with UnNetHack's...
+
+    - new levels, items and monsters
+    - new item, monster and dungeon feature interactions
+    - new powers and effects for existing items
+    - new playable vampire race and convict class
+    - new dungeon branches, rooms and shop types
+    - tutorial mode
+    - dozens of interface improvements, e.g.
+      * dim spaces outside of line-of-sight
+      * auto-open doors
+      * autopickup can ignore dropped items and grab thrown items
+      * paranoid prompts for actions that are usually bad
+      * Ctrl-E to engrave Elbereth
+    - many community patches
+    - rebalanced gameplay
+      * Gehennom completely reworked with open caverns and lava rivers
+      * randomized dragon names and appearances
+      * less free wishes, farming and exploits
+
+UnNitroHack is compiled the same way as NitroHack. To compile UnNitroHack with
+debugging symbols (for stack traces under gdb, useful for bug reports):
+
+    1) Install dependencies:
+      - the usual NetHack dependencies
+        * C compiler
+        * flex
+        * bison
+      - NitroHack interface and client dependencies
+        * ncursesw (NCurses with wide character support)
+        * jansson (JSON support for client to play on remote servers)
+        * zlib (save log compression)
+      - NitroHack build dependencies
+        * cmake
+        * cmake-curses-gui (a.k.a. ccmake, optional but recommended)
+    2) 'mkdir build && cd build'
+    3) 'cmake -DCMAKE_BUILD_TYPE=Debug ..'
+    4) Configure your build with ccmake/cmake-curses-gui
+      - 'ccmake .'
+      - Edit paths by choosing lines with enter.
+      - Press 'c' to rerun configuration with your new paths.
+      - Press 'g' to generate and save your build configuration.
+      - Or press 'q' to cancel or quit if you're happy with the defaults.
+    5) 'make && make install'
+    6) Run the 'unnitrohack' bootstrap script to play.
+      - Settings are stored under ~/.config/NitroHack if you want to change
+        Unicode glyphs or view dump logs.
+
+UnNitroHack can be compiled to run natively on Windows using MinGW; see
+doc/build-mingw.md for details.
+
+Alternately, to build UnNitroHack with Cygwin for Windows:
+
+    1) Install Cygwin with these packages selected:
+      - gcc4 (gcc may also work)
+        * libmpfr4 (needed for gcc4 only, if it's not already selected)
+      - make
+      - cmake
+      - flex
+      - bison
+      - libncursesw-devel
+      - git
+      - zlib-devel
+    2) Install Jansson for Cygwin:
+      - Download source tarball from http://www.digip.org/jansson/.
+      - Extract to C:\cygwin\home\foo where foo is whatever's already there.
+      - Open 'Cygwin Terminal' from the desktop shortcut and type (no quotes):
+        * 'cd jansson-2.4'
+        * './configure'
+        * 'make'
+        * 'make install'
+    3) Get the UnNitroHack source code (still in Cygwin Terminal):
+      - 'cd ~'
+      - 'git clone -b unnethack git://github.com/tung/NitroHack.git unnitrohack'
+      - 'cd unnitrohack'
+      - Follow the usual build instructions above from step 2 onwards.
+
+The Cygwin Terminal (mintty) is like the Windows console (cmd.exe), but supports
+Unicode characters, more fonts (I recommend Liberation Mono), dark gray (set it
+in UnNitroHack's options), unrestricted window size, a choice of cursor style
+and more; just right click and choose "Options...".
+
+
+To build UnNitroHack on OS X:
+
+    1) Install the Homebrew and the Command Line Tools for Xcode
+      - Homebrew: http://mxcl.github.com/homebrew/
+      - Xcode (or the Command Line Tools): http://developer.apple.com/downloads
+    2) Install dependencies via Homebrew:
+      - brew install jansson cmake
+    3) Ncursesw provided by Homebrew-dupes is currently buggy: https://github.com/Homebrew/homebrew-dupes/issues/43
+      - Until that bug is merged upstream, you'll need to install the patched version:
+       * brew install https://gist.github.com/gcatlin/3098450/raw/8cc12bc4d095e654876744cdfa6eb57a24186589/ncurses.rb
+    4) Get the UnNitroHack source code:
+      - 'cd ~'
+      - 'git clone -b unnethack git://github.com/tung/NitroHack.git unnitrohack'
+      - 'cd unnitrohack'
+    5) Build:
+      - Set the installation location:
+       * export NH_INSTALL_DIR=$HOME/unnitrohack
+      - mkdir build
+      - cd build
+      - cmake -DUSE_OSX_HOMEBREW_CURSES=TRUE -DCMAKE_BUILD_TYPE=Debug  -DSHELLDIR=$NH_INSTALL_DIR -DBINDIR=$NH_INSTALL_DIR/data -DDATADIR=$NH_INSTALL_DIR/data -DLIBDIR=$NH_INSTALL_DIR/data ..
+      - make
+      - make install
+
+
+
+See also:
+
+    - Full UnNitroHack change list: https://github.com/tung/NitroHack/wiki
+    - NitroHack: doc/nitrohack.txt and http://www.nitrohack.org/
+    - UnNetHack: http://sourceforge.net/apps/trac/unnethack/
+    - NetHack4: https://gitorious.org/nitrohack/ais523/commits/nicehack

@@ -1,0 +1,24 @@
+nitrohack (4.0.4-1) unstable; urgency=low
+  * Updated packages for 4.0.4
+
+ -- Daniel Thaler <daniel@dthaler.de>  Sun, 19 Feb 2012 17:00:00 +0100
+
+nitrohack (4.0.3-1) unstable; urgency=low
+  * Updated packages for 4.0.3
+
+ -- Daniel Thaler <daniel@dthaler.de>  Sun, 12 Feb 2012 23:00:00 +0100
+
+nitrohack (4.0.2-1) unstable; urgency=low
+  * Updated packages for 4.0.2
+
+ -- Daniel Thaler <daniel@dthaler.de>  Sun, 5 Feb 2012 19:00:00 +0100
+
+nitrohack (4.0.1-1) unstable; urgency=low
+  * Updated packages for 4.0.1
+
+ -- Daniel Thaler <daniel@dthaler.de>  Sun, 22 Jan 2012 23:00:00 +0100
+
+nitrohack (4.0.0-1) unstable; urgency=low
+  * Created a new debian/ directory with packaging info; lets hope this is all OK.
+
+ -- Daniel Thaler <daniel@dthaler.de>  Sat, 14 Jan 2012 20:22:00 +0100
