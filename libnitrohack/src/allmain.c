@@ -369,7 +369,7 @@ boolean nh_start_game(int fd, const char *name, int irole, int irace, int igend,
     log_newgame(fd, turntime, seed, playmode);
 
     newgame();
-    was_on_elbereth = !sengr_at("爱贝瑞斯", u.ux, u.uy); /* force botl update later */
+    was_on_elbereth = !sengr_at("Elbereth", u.ux, u.uy); /* force botl update later */
     wd_message();
 
     api_exit();
@@ -468,7 +468,7 @@ enum nh_restore_status nh_restore_game(int fd, struct nh_window_procs *rwinprocs
 
     bot();
     flush_screen();
-    was_on_elbereth = !sengr_at("爱贝瑞斯", u.ux, u.uy); /* force botl update later */
+    was_on_elbereth = !sengr_at("Elbereth", u.ux, u.uy); /* force botl update later */
 
     welcome(FALSE);
     realtime_messages(TRUE, TRUE);
@@ -1145,8 +1145,8 @@ static void welcome(
 	     currentgend != u.initgend))
 	sprintf(eos(buf), "%s", genders[currentgend].adj + 2);
 
-    pline(new_game ? "%s，%s，欢迎来到DynaHack！  你是%s%s%s。"
-		   : "%s，%s，%s%s%s，欢迎回到DynaHack！",
+    pline(new_game ? "%s，%s，欢迎来到LoongHack！  你是%s%s%s。"
+		   : "%s，%s，%s%s%s，欢迎回到LoongHack！",
 	  Hello(NULL), plname, buf, urace.adj,
 	  (currentgend && urole.name.f) ? urole.name.f : urole.name.m + 2);
 

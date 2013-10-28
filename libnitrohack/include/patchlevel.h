@@ -8,13 +8,13 @@
 #define EDITLEVEL	0
 
 #define COPYRIGHT_BANNER_A \
-"DynaHack Copyright 2012-2013 向鑫"
+"LoongHack Copyright 2013-2013 时间坐标"
 
 #define COPYRIGHT_BANNER_B \
-"NitroHack Copyright 2011-2012 Daniel Thaler"
+"DynaHack  Copyright 2012-2013 Tung Nguyen"
 
 #define COPYRIGHT_BANNER_C \
-"NetHack Copyright 1985-2003 Stichting Mathematisch Centrum and M. Stephenson"
+"NitroHack Copyright 2011-2012 Daniel Thaler"
 
 /*
  * If two or more successive releases have compatible data files, define

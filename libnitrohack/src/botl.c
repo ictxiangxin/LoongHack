@@ -8,31 +8,31 @@
  * Keep this matched up with hunger states in hack.h!
  */
 static const char *const hu_stat[] = {
-	"Satiated",
+	"饱腹",
 	NULL,
-	"Hungry",
-	"Weak",
-	"Fainting",
-	"Fainted",
-	"Starved"
+	"饥饿",
+	"虚弱",
+	"意识模糊",
+	"晕厥",
+	"饿死"
 };
 
 static const char *const enc_stat[] = {
 	NULL,
-	"Burdened",
-	"Stressed",
-	"Strained",
-	"Overtaxed",
-	"Overloaded"
+	"劳累",
+	"紧张",
+	"难受",
+	"痛苦",
+	"崩溃"
 };
 
 static const char *const trap_stat[] = {
-	"Beartrap",
-	"Pit",
-	"Web",
-	"Lava",
-	"Infloor",
-	"Swamp",
+	"陷阱",
+	"针刺陷阱",
+	"网",
+	"熔岩",
+	"陷地",
+	"沼泽",
 };
 
 
@@ -143,34 +143,34 @@ static void describe_level(char *buf, int v)
 	if (Is_knox(&u.uz)) {
 	    sprintf(buf, "%s", dungeons[u.uz.dnum].dname);
 	} else if (Is_blackmarket(&u.uz)) {
-	    if (v == 1) sprintf(buf, "BlackMrkt:%d", depth(&u.uz));
-	    else sprintf(buf, "Black Market");
+	    if (v == 1) sprintf(buf, "黑店:%d", depth(&u.uz));
+	    else sprintf(buf, "黑店");
 	} else if (In_quest(&u.uz)) {
 	    sprintf(buf, "Home%c%d", (v == 0 ? ' ' : ':'), dunlev(&u.uz));
 	} else if (In_endgame(&u.uz)) {
-	    sprintf(buf, Is_astralevel(&u.uz) ? "Astral Plane" : "End Game");
+	    sprintf(buf, Is_astralevel(&u.uz) ? "星界圣殿" : "结束游戏");
 
 	} else if (Is_minetown_level(&u.uz)) {
-	    sprintf(buf, (v == 1 ? "%s%d" : "%s%-2d"), "Mine Town:", depth(&u.uz));
+	    sprintf(buf, (v == 1 ? "%s%d" : "%s%-2d"), "矿镇:", depth(&u.uz));
 	} else if (In_mines(&u.uz) && v == 1) {
-	    sprintf(buf, "Mines:%d", depth(&u.uz));
+	    sprintf(buf, "矿山:%d", depth(&u.uz));
 	} else if (In_sokoban(&u.uz) && v == 1) {
-	    sprintf(buf, "Sokoban:%d", depth(&u.uz));
+	    sprintf(buf, "推箱子:%d", depth(&u.uz));
 	} else if (Is_town_level(&u.uz)) {
-	    sprintf(buf, "Town:%d", depth(&u.uz));
+	    sprintf(buf, "城镇:%d", depth(&u.uz));
 
 	} else if (Is_valley(&u.uz) && v > 0) {
-	    sprintf(buf, "Valley:%d", depth(&u.uz));
+	    sprintf(buf, "山谷:%d", depth(&u.uz));
 	} else if (In_V_tower(&u.uz) && v == 1) {
-	    sprintf(buf, "Vlad:%d", depth(&u.uz));
+	    sprintf(buf, "弗拉德之塔:%d", depth(&u.uz));
 	} else if (In_dragon(&u.uz) && v == 1) {
-	    sprintf(buf, "Dragon:%d", depth(&u.uz));
+	    sprintf(buf, "龙窟:%d", depth(&u.uz));
 	} else if (In_hell(&u.uz) && v == 1) {
-	    sprintf(buf, "Gehennom:%d", depth(&u.uz));
+	    sprintf(buf, "炼狱:%d", depth(&u.uz));
 
 	} else {
 	    if (v == 1) {
-		sprintf(buf, "Dungeons:%d", depth(&u.uz));
+		sprintf(buf, "地下城:%d", depth(&u.uz));
 	    } else if (v == 2) {
 		const char *dgn_name = dungeons[u.uz.dnum].dname;
 		if (!strncmpi(dgn_name, "The ", 4)) dgn_name += 4;
@@ -290,41 +290,41 @@ static void make_player_info(struct nh_player_info *pi)
 	    strncpy(pi->statusitems[pi->nr_items++], hu_stat[u.uhs], ITEMLEN);
 	
 	if (Confusion) /* 2 */
-	    strncpy(pi->statusitems[pi->nr_items++], "Conf", ITEMLEN);
+	    strncpy(pi->statusitems[pi->nr_items++], "混乱", ITEMLEN);
 	
 	if (Sick) {
 	    if (u.usick_type & SICK_VOMITABLE) /* 3 */
-		strncpy(pi->statusitems[pi->nr_items++], "FoodPois", ITEMLEN);
+		strncpy(pi->statusitems[pi->nr_items++], "食物中毒", ITEMLEN);
 	    if (u.usick_type & SICK_NONVOMITABLE) /* 4 */
-		strncpy(pi->statusitems[pi->nr_items++], "Ill", ITEMLEN);
+		strncpy(pi->statusitems[pi->nr_items++], "医生", ITEMLEN);
 	}
 	if (Blind) /* 5 */
-	    strncpy(pi->statusitems[pi->nr_items++], "Blind", ITEMLEN);
+	    strncpy(pi->statusitems[pi->nr_items++], "眼瞎", ITEMLEN);
 	if (Glib) /* 6 */
-	    strncpy(pi->statusitems[pi->nr_items++], "Greasy", ITEMLEN);
+	    strncpy(pi->statusitems[pi->nr_items++], "滑腻", ITEMLEN);
 	if (Wounded_legs) /* 7 */
-	    strncpy(pi->statusitems[pi->nr_items++], "Lame", ITEMLEN);
+	    strncpy(pi->statusitems[pi->nr_items++], "脚瘸", ITEMLEN);
 	if (Stunned) /* 8 */
-	    strncpy(pi->statusitems[pi->nr_items++], "Stun", ITEMLEN);
+	    strncpy(pi->statusitems[pi->nr_items++], "眩晕", ITEMLEN);
 	if (Hallucination) /* 9 */
-	    strncpy(pi->statusitems[pi->nr_items++], "Hallu", ITEMLEN);
+	    strncpy(pi->statusitems[pi->nr_items++], "幻觉", ITEMLEN);
 	if (Strangled) /* 10 */
-	    strncpy(pi->statusitems[pi->nr_items++], "Strangle", ITEMLEN);
+	    strncpy(pi->statusitems[pi->nr_items++], "窒息", ITEMLEN);
 	if (Slimed) /* 11 */
-	    strncpy(pi->statusitems[pi->nr_items++], "Slime", ITEMLEN);
+	    strncpy(pi->statusitems[pi->nr_items++], "粘液", ITEMLEN);
 	if (Stoned) /* 12 */
-	    strncpy(pi->statusitems[pi->nr_items++], "Petrify", ITEMLEN);
+	    strncpy(pi->statusitems[pi->nr_items++], "石化", ITEMLEN);
 	if (u.ustuck && !u.uswallow && !sticks(youmonst.data)) /* 13 */
-	    strncpy(pi->statusitems[pi->nr_items++], "Held", ITEMLEN);
+	    strncpy(pi->statusitems[pi->nr_items++], "冻结", ITEMLEN);
 	cap = near_capacity();
 	if (enc_stat[cap]) /* 14 */
 	    strncpy(pi->statusitems[pi->nr_items++], enc_stat[cap], ITEMLEN);
 	if (Levitation) /* 15 */
-	    strncpy(pi->statusitems[pi->nr_items++], "Lev", ITEMLEN);
+	    strncpy(pi->statusitems[pi->nr_items++], "飘浮", ITEMLEN);
 	else if (Flying)
-	    strncpy(pi->statusitems[pi->nr_items++], "Fly", ITEMLEN);
+	    strncpy(pi->statusitems[pi->nr_items++], "飞行", ITEMLEN);
 	if (unweapon) /* 16 */
-	    strncpy(pi->statusitems[pi->nr_items++], "Unarmed", ITEMLEN);
+	    strncpy(pi->statusitems[pi->nr_items++], "手无寸铁", ITEMLEN);
 	if (u.utrap) /* 17 */
 	    strncpy(pi->statusitems[pi->nr_items++], trap_stat[u.utraptype], ITEMLEN);
 	if (!Blind && sengr_at("Elbereth", u.ux, u.uy)) /* 18 */

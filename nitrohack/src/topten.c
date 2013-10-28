@@ -58,10 +58,10 @@ static void makeheader(char *linebuf)
 {
     size_t i;
 
-    strcpy(linebuf, " No     Points   Name");
-    for (i = strlen(linebuf); i < COLS - strlen(" Hp [max] ") - 4; i++)
+    strcpy(linebuf, "[排名][  分数  ] 角色名称及其信息");
+    for (i = strlen(linebuf); i < COLS - strlen(" 生命[上限] ") + 12; i++)
 	linebuf[i] = ' ';
-    strcpy(&linebuf[i], " Hp [max] ");
+    strcpy(&linebuf[i], " 生命[上限] ");
 }
 
 

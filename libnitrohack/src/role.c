@@ -1107,7 +1107,7 @@ char *nh_build_plselection_prompt(char *buf, int buflen, int rolenum, int racenu
 
 	strcpy(tmpbuf, "需要我选择");
 	if (racenum != ROLE_NONE || validrole(rolenum))
-		strcat(tmpbuf, "your ");
+		strcat(tmpbuf, "你的");
 	else {
 		strcat(tmpbuf, "一个");
 	}

@@ -168,7 +168,7 @@ static void draw_dungeon_name(const struct nh_player_info *pi,
 	waddstr(statuswin, pi->levdesc_full);
 
     } else {
-	waddstr(statuswin, "????");
+	waddstr(statuswin, "？？？");
     }
 }
 
@@ -192,7 +192,7 @@ static const struct {
     { "饿死", CLR_ORANGE },
     /* misc */
     { "手无寸铁", CLR_YELLOW },
-    { "Lev", CLR_BRIGHT_CYAN },
+    { "飘浮", CLR_BRIGHT_CYAN },
     { "飞行", CLR_BRIGHT_GREEN },
     { "Elbereth", CLR_BRIGHT_GREEN },
     /* trapped */
@@ -201,12 +201,12 @@ static const struct {
     { "陷坑", CLR_YELLOW },
     { "针刺陷阱", CLR_YELLOW },
     { "网", CLR_YELLOW },
-    { "Infloor", CLR_YELLOW },
+    { "陷地", CLR_YELLOW },
     { "岩浆", CLR_ORANGE },
     /* misc bad */
     { "滑腻", CLR_YELLOW },
     { "眼瞎", CLR_YELLOW },
-    { "Conf", CLR_YELLOW },
+    { "混乱", CLR_YELLOW },
     { "脚瘸", CLR_YELLOW },
     { "眩晕", CLR_YELLOW },
     { "幻觉", CLR_YELLOW },
@@ -214,7 +214,7 @@ static const struct {
     { "食物中毒", CLR_ORANGE },
     { "生病", CLR_ORANGE },
     { "窒息", CLR_ORANGE },
-    { "黏住", CLR_ORANGE },
+    { "粘液", CLR_ORANGE },
     { "石化", CLR_ORANGE },
     { NULL, 0 }
 };
@@ -269,7 +269,7 @@ static void draw_time(const struct nh_player_info *pi)
 
     if (colorchange)
 	wattron(statuswin, colorattr);
-    wprintw(statuswin, "T:%ld", pi->moves);
+    wprintw(statuswin, "回合:%ld", pi->moves);
     if (colorchange)
 	wattroff(statuswin, colorattr);
 }
@@ -468,7 +468,7 @@ static void draw_status_lines(struct nh_player_info *pi, nh_bool threeline)
 
     /* score and turns */
     if (settings.showscore)
-	print_statdiff(" ", "S:%ld", oldpi->score, pi->score);
+	print_statdiff(" ", "分数:%ld", oldpi->score, pi->score);
     if (settings.time) {
 	waddstr(statuswin, " ");
 	draw_time(pi);
