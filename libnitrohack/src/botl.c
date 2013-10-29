@@ -296,7 +296,7 @@ static void make_player_info(struct nh_player_info *pi)
 	    if (u.usick_type & SICK_VOMITABLE) /* 3 */
 		strncpy(pi->statusitems[pi->nr_items++], "食物中毒", ITEMLEN);
 	    if (u.usick_type & SICK_NONVOMITABLE) /* 4 */
-		strncpy(pi->statusitems[pi->nr_items++], "医生", ITEMLEN);
+		strncpy(pi->statusitems[pi->nr_items++], "生病", ITEMLEN);
 	}
 	if (Blind) /* 5 */
 	    strncpy(pi->statusitems[pi->nr_items++], "眼瞎", ITEMLEN);

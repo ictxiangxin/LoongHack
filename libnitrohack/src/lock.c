@@ -369,7 +369,7 @@ int pick_lock(struct obj *pick, int rx, int ry, boolean explicit, boolean loot_a
 		      xname(pick));
 		return 0;
 	    } else if (is_pool(level, u.ux, u.uy) && !Underwater) {
-		pline("水没有锁。");
+		pline("水中没有锁。");
 		return 0;
 	    }
 
@@ -387,7 +387,7 @@ int pick_lock(struct obj *pick, int rx, int ry, boolean explicit, boolean loot_a
 		    else if (otmp->otyp == IRON_SAFE) verb = "破开", it = 1;
 		    else if (!otmp->olocked) verb = "锁上", it = 1;
 		    else if (picktyp != LOCK_PICK) verb = "解开", it = 1;
-		    else verb = "pick";
+		    else verb = "摘下";
 		    sprintf(qbuf, "这有一个%s，%s%s？",
 			    safe_qbuf("", sizeof("这有一个，打开它的锁？"),
 				      doname(otmp), an(simple_typename(otmp->otyp)), "一个箱子"),
@@ -440,7 +440,7 @@ int pick_lock(struct obj *pick, int rx, int ry, boolean explicit, boolean loot_a
 		}
 	    if (c != 'y') {
 		if (!count)
-		    pline("There doesn't seem to be any sort of pickable lock here.");
+		    pline("这里似乎没有任何可摘下的锁。");
 		return 0;		/* decided against all boxes */
 	    }
 	} else {			/* pick the lock in a door */

@@ -2427,7 +2427,7 @@ static void del_sokoprizes(void)
 		y = otmp->oy;
 		obj_extract_self(otmp);
 		if (cansee(x, y)) {
-		    pline("You see %s vanishing.", an(xname(otmp)));
+		    pline("你看见%s消失了。", an(xname(otmp)));
 		    newsym(x, y);
 		} else {
 		    cnt++;
@@ -2447,7 +2447,7 @@ static void del_sokoprizes(void)
 	}
 
 	if (cnt && flags.soundok)
-	    You_hear("something popping.");
+	    You_hear("有什么东西爆开了。");
 }
 
 /*pickup.c*/
