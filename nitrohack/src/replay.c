@@ -78,9 +78,9 @@ static void draw_replay_info(struct nh_replay_info *rinfo)
 {
     char buf[BUFSZ];
     
-    sprintf(buf, "REPLAY action %d/%d", rinfo->actions, rinfo->max_actions);
+    sprintf(buf, "动作回放 %d/%d", rinfo->actions, rinfo->max_actions);
     if (*rinfo->nextcmd)
-	sprintf(buf + strlen(buf), "; next command: %s.", rinfo->nextcmd);
+	sprintf(buf + strlen(buf), "；下一条命令：%s。", rinfo->nextcmd);
     
     if (ui_flags.draw_frame) {
 	/* draw the replay state on top of the frame under the map */
@@ -133,7 +133,7 @@ static void timetest(int fd, struct nh_replay_info *rinfo)
     draw_msgwin();
     gettime(&t_end);
     ms = clock_delta_ms(&t_start, &t_end);
-    snprintf(buf, BUFSZ, "%d actions replayed with display in %ld ms. (%ld actions/sec)",
+    snprintf(buf, BUFSZ, "%d次动作在%ld毫秒内展示回放。（%ld 动作/秒）",
 	     rinfo->max_actions, ms, rinfo->max_actions * 1000 / ms);
     curses_msgwin(buf);
     
@@ -147,7 +147,7 @@ static void timetest(int fd, struct nh_replay_info *rinfo)
     nh_view_replay_step(rinfo, REPLAY_GOTO, mmax);
     gettime(&t_end);
     ms = clock_delta_ms(&t_start, &t_end);
-    snprintf(buf, BUFSZ, "%d actions replayed without display in %ld ms. (%ld actions/sec)",
+    snprintf(buf, BUFSZ, "%d次动作在%ld毫秒内非展示回放。（%ld 动作/秒）",
 	     rinfo->actions, ms, rinfo->actions * 1000 / ms);
     curses_msgwin(buf);
     
@@ -163,7 +163,7 @@ static void timetest(int fd, struct nh_replay_info *rinfo)
     }
     gettime(&t_end);
     ms = clock_delta_ms(&t_start, &t_end);
-    snprintf(buf, BUFSZ, "%d actions replayed backward with display in %ld ms. (%ld actions/sec)",
+    snprintf(buf, BUFSZ, "%d次动作在%ld毫秒内向后回放。（%ld 动作/秒）",
 	     revpos - rinfo->actions, ms, (revpos - rinfo->actions) * 1000 / ms);
     curses_msgwin(buf);
     
@@ -177,14 +177,14 @@ static void timetest(int fd, struct nh_replay_info *rinfo) {}
 static void show_replay_help(void)
 {
     static struct nh_menuitem items[] = {
-	{0, MI_TEXT, "KEY_RIGHT or SPACE\t- advance one move"},
-	{0, MI_TEXT, "KEY_LEFT\t- go back one move"},
-	{0, MI_TEXT, "g\t- go to any move"},
-	{0, MI_TEXT, "ESC\t- leave the replay"},
+	{0, MI_TEXT, "右方向键或空格键\t——推进一步"},
+	{0, MI_TEXT, "左方向键\t——退回一步"},
+	{0, MI_TEXT, "g键\t——跳到任意一步"},
+	{0, MI_TEXT, "ESC键\t——退出回放"},
 	{0, MI_TEXT, ""},
-	{0, MI_TEXT, "Informational game commands like \"inventory\" or \"discoveries\" will also work"}
+	{0, MI_TEXT, "像\"inventory\"或\"discoveries\"之类的游戏信息指令依然适用"}
     };
-    curses_display_menu(items, 6, "Replay help:", PICK_NONE, NULL);
+    curses_display_menu(items, 6, "回放操作说明：", PICK_NONE, NULL);
 }
 
 
@@ -221,8 +221,8 @@ void replay_commandloop(int fd)
 		ret = nh_view_replay_step(&rinfo, REPLAY_FORWARD, 1);
 		draw_replay_info(&rinfo);
 		if (ret == FALSE) {
-		    key = curses_msgwin("You have reached the end of this game. "
-		                        "Go back or press ESC to exit.");
+		    key = curses_msgwin("游戏进程结束。"
+		                        "回放或者按ESC键退出。");
 		    if (key == KEY_ESC)
 			goto out;
 		}
@@ -238,7 +238,7 @@ void replay_commandloop(int fd)
 		goto out;
 
 	    case 'g':
-		strncpy(qbuf, "What move do you want to jump to?", BUFSZ);
+		strncpy(qbuf, "你想跳到哪一步？", BUFSZ);
 		if (rinfo.max_moves > 0)
 		    sprintf(qbuf + strlen(qbuf), " (Max: %d)", rinfo.max_moves);
 		
@@ -290,7 +290,7 @@ void replay(void)
     if (*logdir)	dir = logdir;
     else if (*savedir)	dir = savedir;
     else {
-	curses_msgwin("There are no games to replay.");
+	curses_msgwin("没有游戏记录来回放。");
 	return;
     }
     
@@ -300,10 +300,10 @@ void replay(void)
 	/* make sure there are some files to show */
 	if (!filecount) {
 	    if (dir == savedir) {
-		curses_msgwin("There are no saved games to replay.");
+		curses_msgwin("没有已保存的游戏来回放。");
 		savedir[0] = '\0';
 	    } else {
-		curses_msgwin("There are no completed games to replay.");
+		curses_msgwin("没有已结束的游戏来回放。");
 		logdir[0] = '\0';
 	    }
 	    
@@ -318,11 +318,11 @@ void replay(void)
 
 	if (dir == logdir && *savedir) {
 	    add_menu_item(items, size, icount, -1,
-			  "View saved games instead", '!', FALSE);
+			  "查看已保存的游戏", '!', FALSE);
 	    add_menu_txt(items, size, icount, "", MI_NORMAL);
 	} else if (dir == savedir && *logdir) {
 	    add_menu_item(items, size, icount, -1,
-			  "View completed games instead", '!', FALSE);
+			  "查看已结束的游戏", '!', FALSE);
 	    add_menu_txt(items, size, icount, "", MI_NORMAL);
 	}
 
@@ -340,8 +340,8 @@ void replay(void)
 
 	n = curses_display_menu(items, icount,
 				(dir == savedir ?
-				 "Pick a saved game to view" :
-				 "Pick a completed game to view"),
+				 "选择一个已保存的游戏观看" :
+				 "选择一个己结束的游戏观看"),
 				PICK_ONE, pick);
 	free(items);
 	filename[0] = '\0';
