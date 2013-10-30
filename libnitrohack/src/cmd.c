@@ -59,94 +59,94 @@ static char *enlght_combatinc(const char *,int,int,char *);
 
 const struct cmd_desc cmdlist[] = {
 	/* "str", "", defkey, altkey, wiz, buried, func, arg*/
-	{"adjust", "adjust inventory letters", M('a'), 0, TRUE, doorganize, CMD_ARG_NONE | CMD_ARG_OBJ | CMD_EXT},
-	{"annotate", "name the current level", 0, C('f'), TRUE, donamelevel, CMD_ARG_NONE | CMD_EXT},
-	{"apply", "use a tool or dip into a potion", 'a', 0, FALSE, doapply, CMD_ARG_NONE | CMD_ARG_OBJ},
-	{"attributes", "show your attributes", C('x'), 0, TRUE, doattributes, CMD_ARG_NONE},
-	{"autoexplore", "automatically explore until something happens", 'v', 0, FALSE, doautoexplore, CMD_ARG_NONE},
-	{"cast", "cast a spell from memory", 'Z', 0, TRUE, docast, CMD_ARG_NONE},
-	{"chat", "talk to someone", 'c', M('c'), TRUE, dotalk, CMD_ARG_NONE | CMD_EXT},	/* converse? */
-	{"close", "close a door", 0, 0, FALSE, doclose, CMD_ARG_DIR},
-	{"conduct", "list which challenges you have adhered to", 0, 0, TRUE, doconduct, CMD_ARG_NONE | CMD_EXT | CMD_NOTIME},
-	{"countgold", "show gold, debt, credit, and unpaid items", '$', 0, TRUE, doprgold, CMD_ARG_NONE | CMD_NOTIME},
-	{"dip", "dip an object into something", M('d'), 0, FALSE, dodip, CMD_ARG_NONE | CMD_EXT | CMD_ARG_OBJ},
-	{"discoveries", "show your knowledge about items", '\\', 0, TRUE, dodiscovered, CMD_ARG_NONE | CMD_NOTIME},
-	{"drink", "quaff a potion", 'q', 0, FALSE, dodrink, CMD_ARG_NONE | CMD_ARG_OBJ},
-	{"drop", "drop one item", 'd', 0, FALSE, dodrop, CMD_ARG_NONE | CMD_ARG_OBJ},
-	{"eat", "eat an item from inventory or the floor", 'e', 0, FALSE, doeat, CMD_ARG_NONE | CMD_ARG_OBJ},
-	{"elbereth", "write an Elbereth in the dust", C('e'), 0, FALSE, doelbereth, CMD_ARG_NONE},
-	{"enhance", "advance or check weapons skills", M('e'), 0, TRUE, enhance_weapon_skill, CMD_ARG_NONE | CMD_EXT},
-	{"engrave", "write on the floor", 'E', 0, FALSE, doengrave, CMD_ARG_NONE | CMD_ARG_OBJ | CMD_ZEROOBJ},
-	{"farlook", "say what is on a distant square", ';', 0, TRUE, doquickwhatis, CMD_ARG_NONE | CMD_NOTIME},
-	{"fight", "attack even if no hostile monster is visible", 'F', 0, FALSE, dofight, CMD_ARG_DIR},
-	{"fire", "throw your quivered item", 'f', 0, FALSE, dofire, CMD_ARG_NONE},
-	{"force", "force a lock", M('f'), 0, FALSE, doforce, CMD_ARG_NONE | CMD_EXT},
-	{"history", "show a list of your historic deeds", 0, 0, TRUE, dohistory, CMD_ARG_NONE | CMD_EXT | CMD_NOTIME},
-	{"idtrap", "identify a trap", '^', 0, TRUE, doidtrap, CMD_ARG_NONE | CMD_NOTIME},
-	{"inventory", "show your inventory", 'i', 0, TRUE, ddoinv, CMD_ARG_NONE | CMD_NOTIME},
-	{"invoke", "invoke an object's powers", 'V', M('i'), TRUE, doinvoke, CMD_ARG_NONE | CMD_EXT | CMD_ARG_OBJ},
-	{"jump", "jump to a location", M('j'), 'j', FALSE, dojump, CMD_ARG_NONE | CMD_EXT},
-	{"kick", "kick an adjacent object or monster", C('d'), 'k', FALSE, dokick, CMD_ARG_NONE},
-	{"license", "show the DynaHack license", 0, 0, TRUE, dolicense, CMD_ARG_NONE | CMD_HELP | CMD_NOTIME},
-	{"lookhere", "describe the current square", ':', 0, TRUE, dolook, CMD_ARG_NONE | CMD_NOTIME},
-	{"loot", "loot a bag or box on the floor", M('l'), 'l', FALSE, doloot, CMD_ARG_NONE | CMD_EXT},
-	{"menuinv", "show a partial inventory", 'I', 0, TRUE, dotypeinv, CMD_ARG_NONE | CMD_NOTIME},
-	{"monster", "use a monster's special ability", 'M', M('m'), TRUE, domonability, CMD_ARG_NONE | CMD_EXT},
-	{"multidrop", "drop multiple items", 'D', 0, FALSE, doddrop, CMD_ARG_NONE},
-	{"name", "name a monster, item or type of object", M('n'), 'C', TRUE, do_naming, CMD_ARG_NONE | CMD_ARG_OBJ | CMD_EXT},
-	{"name mon", "christen a monster", 0, 0, TRUE, do_mname, CMD_ARG_NONE},
-	{"open", "open a door", 'o', 0, FALSE, doopen, CMD_ARG_NONE | CMD_ARG_DIR},
-	{"overview", "show an overview of the dungeon", C('o'), 0, TRUE, dooverview, CMD_ARG_NONE | CMD_EXT | CMD_NOTIME},
-	{"pay", "pay a shopkeeper", 'p', 0, FALSE, dopay, CMD_ARG_NONE | CMD_ARG_OBJ},
-	{"pickup", "take items from the floor", ',', 0, FALSE, dopickup, CMD_ARG_NONE},
-	{"pray", "pray to the gods for help", M('p'), 0, TRUE, dopray, CMD_ARG_NONE | CMD_EXT},
-	{"put on", "put on jewellery or accessories", 'P', 0, FALSE, doputon, CMD_ARG_NONE | CMD_ARG_OBJ},
-	{"quit", "exit without saving current game", M('q'), 0, TRUE, done2, CMD_ARG_NONE | CMD_EXT},
-	{"quiver", "ready an item for firing", 'Q', 0, FALSE, dowieldquiver, CMD_ARG_NONE | CMD_ARG_OBJ},
-	{"read", "read a scroll or spellbook", 'r', 0, FALSE, doread, CMD_ARG_NONE | CMD_ARG_OBJ},
-	{"redraw", "redraw the screen", C('r'), C('l'), TRUE, doredraw, CMD_ARG_NONE | CMD_NOTIME},
-	{"remove", "remove jewellery or accessories", 'R', 0, FALSE, doremring, CMD_ARG_NONE | CMD_ARG_OBJ},
-	{"removearm", "remove multiple pieces of equipment", 'A', 0, FALSE, doddoremarm, CMD_ARG_NONE},
-	{"ride", "ride (or stop riding) a monster", 0, 0, FALSE, doride, CMD_ARG_NONE | CMD_EXT},
-	{"rub", "rub a lamp or a stone", M('r'), 0, FALSE, dorub, CMD_ARG_NONE | CMD_EXT | CMD_ARG_OBJ},
-	{"sacrifice", "offer a sacrifice to the gods", M('o'), 0, FALSE, dosacrifice, CMD_ARG_NONE | CMD_EXT | CMD_ARG_OBJ},
-	{"save", "save the game and exit", 'S', 0, TRUE, dosave, CMD_ARG_NONE},
-	{"search", "search for hidden doors and traps", 's', 0, TRUE, dosearch, CMD_ARG_NONE, "searching"},
-	{"showamulets", "list the amulets in your inventory", '"', 0, TRUE, dopramulet, CMD_ARG_NONE | CMD_NOTIME},
-	{"showarmor", "list the armor in your inventory", '[', 0, TRUE, doprarm, CMD_ARG_NONE | CMD_NOTIME},
-	{"showrings", "list the rings in your inventory", '=', 0, TRUE, doprring, CMD_ARG_NONE | CMD_NOTIME},
-	{"showtools", "list the tools in your inventory", '(', 0, TRUE, doprtool, CMD_ARG_NONE | CMD_NOTIME},
-	{"showweapon", "list the weapons in your inventory", ')', 0, TRUE, doprwep, CMD_ARG_NONE | CMD_NOTIME},
-	{"showworn", "show the items you are wearing", '*', 0, TRUE, doprinuse, CMD_ARG_NONE | CMD_NOTIME},
-	{"sit", "sit down", M('s'), 0, FALSE, dosit, CMD_ARG_NONE | CMD_EXT},
-	{"spellbook", "display and change letters of spells", '+', 0, TRUE, dovspell, CMD_ARG_NONE},
-	{"swapweapon", "exchange wielded and alternate weapon", 'x', 0, FALSE, doswapweapon, CMD_ARG_NONE},
-	{"takeoff", "take off an item you are wearing", 'T', 0, FALSE, dotakeoff, CMD_ARG_NONE | CMD_ARG_OBJ},
-	{"teleport", "use intrinsic or magical teleportation ability", C('t'), 0, TRUE, dotele, CMD_ARG_NONE},
-	{"throw", "throw an item", 't', 0, FALSE, dothrow, CMD_ARG_NONE | CMD_ARG_OBJ},
-	{"tip", "empty a container of its contents", 0, 0, FALSE, dotip, CMD_ARG_NONE | CMD_ARG_OBJ | CMD_EXT},
-	{"togglepickup", "toggle the autopickup option", '@', 0, TRUE, dotogglepickup, CMD_ARG_NONE},
-	{"travel", "walk until a given square is reached", '_', 0, TRUE, dotravel, CMD_ARG_NONE | CMD_ARG_POS},
-	{"turn", "turn undead", M('t'), 0, TRUE, doturn, CMD_ARG_NONE | CMD_EXT},
-	{"tutorialreview", "review tutorial messages", C('v'), 0, TRUE, wiz_levport_or_tut_rev, CMD_HELP | CMD_ARG_NONE | CMD_NOTIME},
-	{"twoweapon", "toggle two-weapon combat", M('2'), 'X', FALSE, dotwoweapon, CMD_ARG_NONE | CMD_EXT},
-	{"untrap", "untrap something", M('u'), 'u', FALSE, dountrap, CMD_ARG_NONE | CMD_EXT},
-	{"version", "show version number", 0, 0, TRUE, doversion, CMD_HELP | CMD_ARG_NONE | CMD_NOTIME | CMD_EXT},
-	{"verhistory", "show version history", 0, 0, TRUE, doverhistory, CMD_HELP | CMD_ARG_NONE | CMD_NOTIME | CMD_EXT},
-	{"wait", "do nothing for one turn", '.', 0, TRUE, donull, CMD_ARG_NONE, "waiting"},
-	{"wear", "wear clothing or armor", 'W', 0, FALSE, dowear, CMD_ARG_NONE | CMD_ARG_OBJ},
-	{"wield", "hold an item in your hands", 'w', 0, FALSE, dowield, CMD_ARG_NONE | CMD_ARG_OBJ | CMD_ZEROOBJ},
-	{"wipe", "wipe off your face", M('w'), 0, FALSE, dowipe, CMD_ARG_NONE | CMD_EXT},
-	{"whatis", "describe a symbol", '/', 0, TRUE, dowhatis, CMD_HELP | CMD_ARG_NONE | CMD_NOTIME},
-	{"whatisinv", "describe an object in your inventory", 0, 0, TRUE, dowhatisinv, CMD_HELP | CMD_ARG_NONE | CMD_ARG_OBJ | CMD_NOTIME},
-	{"zap", "zap a wand to use its magic", 'z', 0, FALSE, dozap, CMD_ARG_NONE | CMD_ARG_OBJ},
+	{"adjust", "调整物品的快捷键", M('a'), 0, TRUE, doorganize, CMD_ARG_NONE | CMD_ARG_OBJ | CMD_EXT},
+	{"annotate", "命名当前层", 0, C('f'), TRUE, donamelevel, CMD_ARG_NONE | CMD_EXT},
+	{"apply", "使用道具或将物品浸入药水", 'a', 0, FALSE, doapply, CMD_ARG_NONE | CMD_ARG_OBJ},
+	{"attributes", "显示你的属性", C('x'), 0, TRUE, doattributes, CMD_ARG_NONE},
+	{"autoexplore", "自动探索直到有事件发生", 'v', 0, FALSE, doautoexplore, CMD_ARG_NONE},
+	{"cast", "施放一个法术", 'Z', 0, TRUE, docast, CMD_ARG_NONE},
+	{"chat", "与别人交谈", 'c', M('c'), TRUE, dotalk, CMD_ARG_NONE | CMD_EXT},	/* converse? */
+	{"close", "关闭一扇门", 0, 0, FALSE, doclose, CMD_ARG_DIR},
+	{"conduct", "列出你的保持着的挑战", 0, 0, TRUE, doconduct, CMD_ARG_NONE | CMD_EXT | CMD_NOTIME},
+	{"countgold", "显示金币、债务、信用额度和赊账的物品", '$', 0, TRUE, doprgold, CMD_ARG_NONE | CMD_NOTIME},
+	{"dip", "将物品浸入到别的东西中", M('d'), 0, FALSE, dodip, CMD_ARG_NONE | CMD_EXT | CMD_ARG_OBJ},
+	{"discoveries", "显示你发现和已认识的物品", '\\', 0, TRUE, dodiscovered, CMD_ARG_NONE | CMD_NOTIME},
+	{"drink", "饮用药水", 'q', 0, FALSE, dodrink, CMD_ARG_NONE | CMD_ARG_OBJ},
+	{"drop", "丢掉一件物品", 'd', 0, FALSE, dodrop, CMD_ARG_NONE | CMD_ARG_OBJ},
+	{"eat", "从物品栏中或地上吃东西", 'e', 0, FALSE, doeat, CMD_ARG_NONE | CMD_ARG_OBJ},
+	{"elbereth", "在灰尘上写Elbereth", C('e'), 0, FALSE, doelbereth, CMD_ARG_NONE},
+	{"enhance", "强化或检查武器的能力", M('e'), 0, TRUE, enhance_weapon_skill, CMD_ARG_NONE | CMD_EXT},
+	{"engrave", "在地板上刻字", 'E', 0, FALSE, doengrave, CMD_ARG_NONE | CMD_ARG_OBJ | CMD_ZEROOBJ},
+	{"farlook", "观察远处的物体", ';', 0, TRUE, doquickwhatis, CMD_ARG_NONE | CMD_NOTIME},
+	{"fight", "攻击一个可见的但非敌对的怪物", 'F', 0, FALSE, dofight, CMD_ARG_DIR},
+	{"fire", "投掷你已上膛的物品", 'f', 0, FALSE, dofire, CMD_ARG_NONE},
+	{"force", "撬开锁", M('f'), 0, FALSE, doforce, CMD_ARG_NONE | CMD_EXT},
+	{"history", "列出你辉煌的成就", 0, 0, TRUE, dohistory, CMD_ARG_NONE | CMD_EXT | CMD_NOTIME},
+	{"idtrap", "辨识一个陷阱", '^', 0, TRUE, doidtrap, CMD_ARG_NONE | CMD_NOTIME},
+	{"inventory", "显示你持有的物品", 'i', 0, TRUE, ddoinv, CMD_ARG_NONE | CMD_NOTIME},
+	{"invoke", "呼唤一件物品的力量", 'V', M('i'), TRUE, doinvoke, CMD_ARG_NONE | CMD_EXT | CMD_ARG_OBJ},
+	{"jump", "跳到一个地方", M('j'), 'j', FALSE, dojump, CMD_ARG_NONE | CMD_EXT},
+	{"kick", "用脚踢相邻的物体或怪物", C('d'), 'k', FALSE, dokick, CMD_ARG_NONE},
+	{"license", "显示LoongHack的许可说明", 0, 0, TRUE, dolicense, CMD_ARG_NONE | CMD_HELP | CMD_NOTIME},
+	{"lookhere", "仔细观察当前位置", ':', 0, TRUE, dolook, CMD_ARG_NONE | CMD_NOTIME},
+	{"loot", "查看地上的包或箱子", M('l'), 'l', FALSE, doloot, CMD_ARG_NONE | CMD_EXT},
+	{"menuinv", "显示一部分物品", 'I', 0, TRUE, dotypeinv, CMD_ARG_NONE | CMD_NOTIME},
+	{"monster", "使用怪物的特殊技能", 'M', M('m'), TRUE, domonability, CMD_ARG_NONE | CMD_EXT},
+	{"multidrop", "丢掉多件物品", 'D', 0, FALSE, doddrop, CMD_ARG_NONE},
+	{"name", "命名一个怪物、物品或一类物体", M('n'), 'C', TRUE, do_naming, CMD_ARG_NONE | CMD_ARG_OBJ | CMD_EXT},
+	{"name mon", "为怪物洗礼命名", 0, 0, TRUE, do_mname, CMD_ARG_NONE},
+	{"open", "打开一扇门", 'o', 0, FALSE, doopen, CMD_ARG_NONE | CMD_ARG_DIR},
+	{"overview", "显示当前地下城的概况", C('o'), 0, TRUE, dooverview, CMD_ARG_NONE | CMD_EXT | CMD_NOTIME},
+	{"pay", "给商店老板付款", 'p', 0, FALSE, dopay, CMD_ARG_NONE | CMD_ARG_OBJ},
+	{"pickup", "从地上拾取物品", ',', 0, FALSE, dopickup, CMD_ARG_NONE},
+	{"pray", "祈祷神的帮助", M('p'), 0, TRUE, dopray, CMD_ARG_NONE | CMD_EXT},
+	{"put on", "戴上宝石或饰品", 'P', 0, FALSE, doputon, CMD_ARG_NONE | CMD_ARG_OBJ},
+	{"quit", "直接退出游戏", M('q'), 0, TRUE, done2, CMD_ARG_NONE | CMD_EXT},
+	{"quiver", "使物品可以开火", 'Q', 0, FALSE, dowieldquiver, CMD_ARG_NONE | CMD_ARG_OBJ},
+	{"read", "阅读卷轴或魔咒书", 'r', 0, FALSE, doread, CMD_ARG_NONE | CMD_ARG_OBJ},
+	{"redraw", "重绘屏幕", C('r'), C('l'), TRUE, doredraw, CMD_ARG_NONE | CMD_NOTIME},
+	{"remove", "取下宝石或饰品", 'R', 0, FALSE, doremring, CMD_ARG_NONE | CMD_ARG_OBJ},
+	{"removearm", "脱下多件装备", 'A', 0, FALSE, doddoremarm, CMD_ARG_NONE},
+	{"ride", "乘骑（或停止乘骑）一个怪物", 0, 0, FALSE, doride, CMD_ARG_NONE | CMD_EXT},
+	{"rub", "擦拭灯或者石头", M('r'), 0, FALSE, dorub, CMD_ARG_NONE | CMD_EXT | CMD_ARG_OBJ},
+	{"sacrifice", "给神奉献祭品", M('o'), 0, FALSE, dosacrifice, CMD_ARG_NONE | CMD_EXT | CMD_ARG_OBJ},
+	{"save", "保存然后退出游戏", 'S', 0, TRUE, dosave, CMD_ARG_NONE},
+	{"search", "搜索隐藏的门和陷阱", 's', 0, TRUE, dosearch, CMD_ARG_NONE, "searching"},
+	{"showamulets", "列出物品栏中的护身符", '"', 0, TRUE, dopramulet, CMD_ARG_NONE | CMD_NOTIME},
+	{"showarmor", "列出物品栏中的头盔", '[', 0, TRUE, doprarm, CMD_ARG_NONE | CMD_NOTIME},
+	{"showrings", "列出物品栏中的指环", '=', 0, TRUE, doprring, CMD_ARG_NONE | CMD_NOTIME},
+	{"showtools", "列出物品栏中的道具", '(', 0, TRUE, doprtool, CMD_ARG_NONE | CMD_NOTIME},
+	{"showweapon", "列出物品栏中的武器list the weapons in your inventory", ')', 0, TRUE, doprwep, CMD_ARG_NONE | CMD_NOTIME},
+	{"showworn", "显示当前穿戴的装备", '*', 0, TRUE, doprinuse, CMD_ARG_NONE | CMD_NOTIME},
+	{"sit", "坐下", M('s'), 0, FALSE, dosit, CMD_ARG_NONE | CMD_EXT},
+	{"spellbook", "显示和改变咒语的快捷键", '+', 0, TRUE, dovspell, CMD_ARG_NONE},
+	{"swapweapon", "交换激活和备用武器", 'x', 0, FALSE, doswapweapon, CMD_ARG_NONE},
+	{"takeoff", "卸下已穿戴的装备", 'T', 0, FALSE, dotakeoff, CMD_ARG_NONE | CMD_ARG_OBJ},
+	{"teleport", "使用魔法进行瞬间移动", C('t'), 0, TRUE, dotele, CMD_ARG_NONE},
+	{"throw", "投掷一件物品", 't', 0, FALSE, dothrow, CMD_ARG_NONE | CMD_ARG_OBJ},
+	{"tip", "倾倒一个容器的所有物品", 0, 0, FALSE, dotip, CMD_ARG_NONE | CMD_ARG_OBJ | CMD_EXT},
+	{"togglepickup", "切换自动拾取模式", '@', 0, TRUE, dotogglepickup, CMD_ARG_NONE},
+	{"travel", "移动直到到达指定的位置", '_', 0, TRUE, dotravel, CMD_ARG_NONE | CMD_ARG_POS},
+	{"turn", "驱散亡灵", M('t'), 0, TRUE, doturn, CMD_ARG_NONE | CMD_EXT},
+	{"tutorialreview", "查看教学信息", C('v'), 0, TRUE, wiz_levport_or_tut_rev, CMD_HELP | CMD_ARG_NONE | CMD_NOTIME},
+	{"twoweapon", "切换双持武器模式", M('2'), 'X', FALSE, dotwoweapon, CMD_ARG_NONE | CMD_EXT},
+	{"untrap", "反陷阱", M('u'), 'u', FALSE, dountrap, CMD_ARG_NONE | CMD_EXT},
+	{"version", "显示版本号", 0, 0, TRUE, doversion, CMD_HELP | CMD_ARG_NONE | CMD_NOTIME | CMD_EXT},
+	{"verhistory", "查看历史版本", 0, 0, TRUE, doverhistory, CMD_HELP | CMD_ARG_NONE | CMD_NOTIME | CMD_EXT},
+	{"wait", "等待一回合", '.', 0, TRUE, donull, CMD_ARG_NONE, "waiting"},
+	{"wear", "穿戴头盔或衣服", 'W', 0, FALSE, dowear, CMD_ARG_NONE | CMD_ARG_OBJ},
+	{"wield", "将物品拿在手上", 'w', 0, FALSE, dowield, CMD_ARG_NONE | CMD_ARG_OBJ | CMD_ZEROOBJ},
+	{"wipe", "擦拭脸", M('w'), 0, FALSE, dowipe, CMD_ARG_NONE | CMD_EXT},
+	{"whatis", "描述一个符号", '/', 0, TRUE, dowhatis, CMD_HELP | CMD_ARG_NONE | CMD_NOTIME},
+	{"whatisinv", "描述一个物品栏中的物品", 0, 0, TRUE, dowhatisinv, CMD_HELP | CMD_ARG_NONE | CMD_ARG_OBJ | CMD_NOTIME},
+	{"zap", "挥动魔杖施放魔法", 'z', 0, FALSE, dozap, CMD_ARG_NONE | CMD_ARG_OBJ},
 	
-	{"move", "move one step", 0, 0, FALSE, domovecmd, CMD_ARG_DIR | CMD_MOVE},
-	{"move nopickup", "move, but don't fight or pick anything up", 'm', 0, FALSE, domovecmd_nopickup, CMD_ARG_DIR | CMD_MOVE},
-	{"run", "run until something interesting is seen", 0, 0, FALSE, dorun, CMD_ARG_DIR | CMD_MOVE},
-	{"run nopickup", "run without picking anything up", 0, 'M', FALSE, dorun_nopickup, CMD_ARG_DIR | CMD_MOVE},
-	{"go", "move, stopping for anything interesting", 'g', 0, FALSE, dogo, CMD_ARG_DIR | CMD_MOVE},
-	{"go2", "like go, but branching corridors are boring", 'G', 0, FALSE, dogo2, CMD_ARG_DIR | CMD_MOVE},
+	{"move", "移动一步", 0, 0, FALSE, domovecmd, CMD_ARG_DIR | CMD_MOVE},
+	{"move nopickup", "移动，但是不进行攻击或拾取任何物品", 'm', 0, FALSE, domovecmd_nopickup, CMD_ARG_DIR | CMD_MOVE},
+	{"run", "奔跑直到看到一些有趣的东西", 0, 0, FALSE, dorun, CMD_ARG_DIR | CMD_MOVE},
+	{"run nopickup", "奔跑但不拾取任何物品", 0, 'M', FALSE, dorun_nopickup, CMD_ARG_DIR | CMD_MOVE},
+	{"go", "移动，碰到任何东西时停下", 'g', 0, FALSE, dogo, CMD_ARG_DIR | CMD_MOVE},
+	{"go2", "移动，但是不进入任何分支", 'G', 0, FALSE, dogo2, CMD_ARG_DIR | CMD_MOVE},
 	
 	{"create monster", "(DEBUG) create a monster", C('g'), 0, TRUE, wiz_genesis, CMD_ARG_NONE | CMD_DEBUG},
 	{"detect", "(DEBUG) detect monsters", 0, 0, TRUE, wiz_detect, CMD_ARG_NONE | CMD_DEBUG | CMD_EXT},
@@ -247,18 +247,18 @@ static int domonability(void)
 	    if (IS_FOUNTAIN(level->locations[u.ux][u.uy].typ)) {
 		if (split_mon(&youmonst, NULL))
 		    dryup(u.ux, u.uy, TRUE);
-	    } else pline("There is no fountain here.");
+	    } else pline("这没有泉水。");
 	} else if (is_unicorn(youmonst.data)) {
 	    fix_attributes_and_properties(NULL, 0);
 	    return 1;
 	} else if (youmonst.data->msound == MS_SHRIEK) {
-	    pline("You shriek.");
+	    pline("你尖叫。");
 	    if (u.uburied)
-		pline("Unfortunately sound does not carry well through rock.");
+		pline("很不幸，声音没能穿透石头。");
 	    else aggravate();
 	} else if (Upolyd)
-		pline("Any special ability you may have is purely reflexive.");
-	else pline("You don't have a special ability in your normal form!");
+		pline("你拥有的任何特殊的能力是纯粹的自反。");
+	else pline("你在正常形态下没有任何特殊能力！");
 	return 0;
 }
 
@@ -273,7 +273,7 @@ static int wiz_wish(void)	/* Unlimited wishes for debug mode by Paul Polderman *
 	    flags.verbose = save_verbose;
 	    encumber_msg();
 	} else
-	    pline("Unavailable command '^W'.");
+	    pline("无效的命令'^W'。");
 	return 0;
 }
 
@@ -281,7 +281,7 @@ static int wiz_wish(void)	/* Unlimited wishes for debug mode by Paul Polderman *
 static int wiz_identify(void)
 {
 	if (wizard)	identify_pack(0);
-	else		pline("Unavailable command '^I'.");
+	else		pline("无效的命令'^I'。");
 	return 0;
 }
 
@@ -302,7 +302,7 @@ static int wiz_map(void)
 	    HConfusion = save_Hconf;
 	    HHallucination = save_Hhallu;
 	} else
-	    pline("Unavailable command '^F'.");
+	    pline("无效的命令'^F'。");
 	return 0;
 }
 
@@ -310,7 +310,7 @@ static int wiz_map(void)
 static int wiz_genesis(void)
 {
 	if (wizard)	create_particular();
-	else		pline("Unavailable command '^G'.");
+	else		pline("无效的命令'^G'。");
 	return 0;
 }
 
@@ -318,7 +318,7 @@ static int wiz_genesis(void)
 static int wiz_where(void)
 {
 	if (wizard) print_dungeon(FALSE, NULL, NULL);
-	else	    pline("Unavailable command '^O'.");
+	else	    pline("无效的命令'^O'。");
 	return 0;
 }
 
@@ -326,7 +326,7 @@ static int wiz_where(void)
 static int wiz_detect(void)
 {
 	if (wizard)  findit();
-	else	    pline("Unavailable command '^E'.");
+	else	    pline("无效的命令'^E'。");
 	return 0;
 }
 
@@ -338,7 +338,7 @@ static int wiz_levport_or_tut_rev(void)
 	else if (flags.tutorial)
 	    tutorial_redisplay();
 	else
-	    pline("Tutorial review is only available in tutorial mode.");
+	    pline("观看教程只能在教学模式下使用。");
 	return 0;
 }
 
@@ -346,8 +346,8 @@ static int wiz_levport_or_tut_rev(void)
 static int wiz_mon_polycontrol(void)
 {
     iflags.mon_polycontrol = !iflags.mon_polycontrol;
-    pline("Monster polymorph control is %s.",
-	  iflags.mon_polycontrol ? "on" : "off");
+    pline("怪物多形态控制%s。",
+	  iflags.mon_polycontrol ? "开启" : "关闭");
     return 0;
 }
 
@@ -358,17 +358,17 @@ static int wiz_level_change(void)
     int newlevel;
     int ret;
 
-    getlin("To what experience level do you want to be set?", buf);
+    getlin("你想设置人物到什么等级？", buf);
     mungspaces(buf);
     if (buf[0] == '\033' || buf[0] == '\0') ret = 0;
     else ret = sscanf(buf, "%d", &newlevel);
 
     if (ret != 1) {
-	pline("Never mind.");
+	pline("没事。");
 	return 0;
     }
     if (newlevel == u.ulevel) {
-	pline("You are already that experienced.");
+	pline("你已经到达这个等级。");
     } else if (newlevel < u.ulevel) {
 	if (u.ulevel == 1) {
 	    pline("You are already as inexperienced as you can get.");
@@ -393,7 +393,7 @@ static int wiz_level_change(void)
 /* #panic command - test program's panic handling */
 static int wiz_panic(void)
 {
-	if (yn("Do you want to call panic() and end your game?") == 'y')
+	if (yn("D你想调用panic()函数来结束游戏吗？") == 'y')
 		panic("crash test.");
         return 0;
 }
@@ -1793,7 +1793,7 @@ int do_command(int command, int repcount, boolean firsttime, struct nh_cmd_arg *
 	    return COMMAND_BAD_ARG;
 	
 	if (u.uburied && !cmdlist[command].can_if_buried) {
-	    pline("You can't do that while you are buried!");
+	    pline("你在隐藏的时候不能那样做！");
 	    res = 0;
 	} else {
 	    multi = repcount;
@@ -1916,7 +1916,7 @@ int get_adjacent_loc(const char *prompt, const char *emsg, xchar x, xchar y,
 	schar dx, dy;
 	
 	if (!getdir(prompt, &dx, &dy, dz)) {
-		pline("Never mind.");
+		pline("没事。");
 		return 0;
 	}
 	new_x = x + dx;
@@ -1971,10 +1971,10 @@ static int dotravel(int x, int y)
 		cc.x = u.ux;
 		cc.y = u.uy;
 	    }
-	    pline("Where do you want to travel to?");
-	    if (getpos(&cc, FALSE, "the desired destination") < 0) {
+	    pline("你想前往哪？");
+	    if (getpos(&cc, FALSE, "需要指定目的地") < 0) {
 		if (flags.verbose)
-		    pline("Never mind.");
+		    pline("没事。");
 		return 0;
 	    }
 	} else {

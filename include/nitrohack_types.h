@@ -402,7 +402,7 @@ struct nh_objresult {
     int count;
 };
 
-#define ITEMLEN 12
+#define ITEMLEN 16
 #define STATUSITEMS_MAX 24
 struct nh_player_info {
     char plname[PL_NSIZ];
