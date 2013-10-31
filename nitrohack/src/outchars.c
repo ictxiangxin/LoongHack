@@ -277,7 +277,7 @@ static void write_symlist(int fd, const struct curses_symdef *list, int len)
 }
 
 static const char uniconf_header[] =
-"# Unicode symbol configuration for DynaHack\n"
+"# Unicode symbol configuration for LoongHack\n"
 "# Lines that begin with '#' are commented out.\n"
 "# Change the '#' to an '!' to activate a line.\n";
 

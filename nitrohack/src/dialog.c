@@ -46,10 +46,10 @@ enum nh_direction curses_getdir(const char *query, nh_bool restricted)
     int curr_key = get_current_cmd_key();
 
     snprintf(qbuf, QBUFSZ, "%s%s%s%s",
-	     query ? query : "In what direction?",
-	     repeat_hint ? " (" : "",
+	     query ? query : "哪个方向？",
+	     repeat_hint ? "（" : "",
 	     repeat_hint ? curses_keyname(curr_key): "",
-	     repeat_hint ? " to repeat)" : "");
+	     repeat_hint ? "重复进行）" : "");
     key = curses_msgwin(qbuf);
     if (key == '.' || key == 's') {
 	last_dir = DIR_SELF;
@@ -65,7 +65,7 @@ enum nh_direction curses_getdir(const char *query, nh_bool restricted)
 	if (curr_key == key && last_dir != DIR_NONE)
 	    dir = last_dir;
 	else
-	    curses_msgwin("What a strange direction!");
+	    curses_msgwin("错误的方向！");
     } else {
 	last_dir = dir;
     }

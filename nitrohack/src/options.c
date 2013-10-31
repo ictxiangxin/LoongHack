@@ -81,9 +81,9 @@ static const char *const bucnames[] = {"unknown", "blessed", "uncursed", "cursed
 #define VTRUE (void*)TRUE
 
 struct nh_option_desc curses_options[] = {
-    {"name", "name for new characters (blank = ask)", OPTTYPE_STRING, {NULL}},
-    {"classic_status", "use classic NetHack layout for status lines", OPTTYPE_BOOL, { FALSE }},
-    {"darkgray", "try to show 'black' as dark gray instead of dark blue", OPTTYPE_BOOL,
+    {"name", "命名新角色（空白=创建时询问）", OPTTYPE_STRING, {NULL}},
+    {"classic_status", "使用经典的NetHack样式来显示状态栏", OPTTYPE_BOOL, { FALSE }},
+    {"darkgray", "尝试使用黑色显示深灰色来替代深蓝色", OPTTYPE_BOOL,
 #if defined(__linux__)
 	{ VTRUE }
 #else
@@ -91,7 +91,7 @@ struct nh_option_desc curses_options[] = {
 	{ FALSE }
 #endif
     },
-    {"darkmsg", "show past messages in a darker color", OPTTYPE_BOOL,
+    {"darkmsg", "将过时信息显示为暗色", OPTTYPE_BOOL,
 #if defined(__linux__)
 	{ VTRUE }
 #else
@@ -107,16 +107,16 @@ struct nh_option_desc curses_options[] = {
 	{ FALSE }
 #endif
     },
-    {"dungeon_name", "how to show dungeon name and/or depth", OPTTYPE_ENUM, {(void*)DGN_NAME_AUTO}},
-    {"extmenu", "use a menu for selecting extended commands (#)", OPTTYPE_BOOL, {FALSE}},
-    {"frame", "draw a frame around the window sections", OPTTYPE_BOOL, { VTRUE }},
-    {"frame_hp_color", "recolor frame according to HP", OPTTYPE_BOOL, { VTRUE }},
-    {"graphics", "enhanced line drawing style", OPTTYPE_ENUM, {(void*)UNICODE_GRAPHICS}},
-    {"hilite_peaceful", "highlight peaceful monsters", OPTTYPE_BOOL, { VTRUE }},
-    {"hilite_pet", "highlight your pet", OPTTYPE_BOOL, { VTRUE }},
-    {"invweight", "show item weights in the inventory", OPTTYPE_BOOL, { VTRUE }},
-    {"keymap", "alter the key to command mapping", OPTTYPE_KEYMAP, {0}},
-    {"mapcolors", "use thematic colors for special map regions", OPTTYPE_BOOL, { VTRUE }},
+    {"dungeon_name", "如何显示地下城的名称和层数", OPTTYPE_ENUM, {(void*)DGN_NAME_AUTO}},
+    {"extmenu", "使用目录来显示扩展命令（#）", OPTTYPE_BOOL, {FALSE}},
+    {"frame", "绘制一个框架环绕窗体", OPTTYPE_BOOL, { VTRUE }},
+    {"frame_hp_color", "框架颜色随生命值而改变", OPTTYPE_BOOL, { VTRUE }},
+    {"graphics", "图像显示模式（LoongHack只能使用Unicode模式！）", OPTTYPE_ENUM, {(void*)UNICODE_GRAPHICS}},
+    {"hilite_peaceful", "高亮处于和平状态的怪物", OPTTYPE_BOOL, { VTRUE }},
+    {"hilite_pet", "高亮你的宠物", OPTTYPE_BOOL, { VTRUE }},
+    {"invweight", "在物品栏中显示物品的重量", OPTTYPE_BOOL, { VTRUE }},
+    {"keymap", "改变命令的键位", OPTTYPE_KEYMAP, {0}},
+    {"mapcolors", "使用为特殊地图场景使用对应的环境着色", OPTTYPE_BOOL, { VTRUE }},
     {"menu_headings", "display style for menu headings", OPTTYPE_ENUM, {(void*)A_REVERSE}},
     {"msgheight", "message window height (0 = auto)", OPTTYPE_INT, {0}},
     {"msghistory", "number of messages saved for prevmsg", OPTTYPE_INT, {(void*)256}},
