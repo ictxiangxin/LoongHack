@@ -99,7 +99,7 @@ struct nh_option_desc curses_options[] = {
 	{ FALSE }
 #endif
     },
-    {"darkroom", "dim colors for out-of-sight spaces", OPTTYPE_BOOL,
+    {"darkroom", "不在视野内的地方用暗色表示", OPTTYPE_BOOL,
 #if defined(__linux__)
 	{ VTRUE }
 #else
@@ -117,22 +117,22 @@ struct nh_option_desc curses_options[] = {
     {"invweight", "在物品栏中显示物品的重量", OPTTYPE_BOOL, { VTRUE }},
     {"keymap", "改变命令的键位", OPTTYPE_KEYMAP, {0}},
     {"mapcolors", "使用为特殊地图场景使用对应的环境着色", OPTTYPE_BOOL, { VTRUE }},
-    {"menu_headings", "display style for menu headings", OPTTYPE_ENUM, {(void*)A_REVERSE}},
-    {"msgheight", "message window height (0 = auto)", OPTTYPE_INT, {0}},
-    {"msghistory", "number of messages saved for prevmsg", OPTTYPE_INT, {(void*)256}},
-    {"optstyle", "option menu display style", OPTTYPE_ENUM, {(void*)OPTSTYLE_FULL}},
-    {"scores_own", "show all your own scores in the list", OPTTYPE_BOOL, { FALSE }},
-    {"scores_top", "how many top scores to show", OPTTYPE_INT, {(void*)3}},
-    {"scores_around", "the number of scores shown around your score", OPTTYPE_INT, {(void*)2}},
-    {"showexp", "show experience points", OPTTYPE_BOOL, {VTRUE}},
-    {"showscore", "show your score in the status line", OPTTYPE_BOOL, {FALSE}},
-    {"sidebar", "draw the inventory sidebar", OPTTYPE_BOOL, { VTRUE }},
-    {"standout", "use standout for --More--", OPTTYPE_BOOL, { VTRUE }},
-    {"status3", "3 line status display", OPTTYPE_BOOL, { VTRUE }},
-    {"time", "display elapsed game time, in moves", OPTTYPE_BOOL, {VTRUE}},
+    {"menu_headings", "在目录顶端显示样式", OPTTYPE_ENUM, {(void*)A_REVERSE}},
+    {"msgheight", "消息窗口的高度（0代表自动）", OPTTYPE_INT, {0}},
+    {"msghistory", "“历史消息”保留的消息数", OPTTYPE_INT, {(void*)256}},
+    {"optstyle", "“设置”目录使用样式", OPTTYPE_ENUM, {(void*)OPTSTYLE_FULL}},
+    {"scores_own", "在列表中显示你自己的分数", OPTTYPE_BOOL, { FALSE }},
+    {"scores_top", "在排行榜中显示的条目数", OPTTYPE_INT, {(void*)3}},
+    {"scores_around", "在你的分数附近的条目数", OPTTYPE_INT, {(void*)2}},
+    {"showexp", "显示经验值", OPTTYPE_BOOL, {VTRUE}},
+    {"showscore", "现状态栏中显示分数", OPTTYPE_BOOL, {FALSE}},
+    {"sidebar", "显示边侧物品栏", OPTTYPE_BOOL, { VTRUE }},
+    {"standout", "用standout显示--More--", OPTTYPE_BOOL, { VTRUE }},
+    {"status3", "3行状态栏显示模式", OPTTYPE_BOOL, { VTRUE }},
+    {"time", "在状态栏中显示游戏回合数", OPTTYPE_BOOL, {VTRUE}},
 #if defined(PDCURSES) && defined(WIN32)
-    {"win_width", "window width", OPTTYPE_INT, {(void*)130}},
-    {"win_height", "window height", OPTTYPE_INT, {(void*)40}},
+    {"win_width", "窗口宽度", OPTTYPE_INT, {(void*)130}},
+    {"win_height", "窗口高度", OPTTYPE_INT, {(void*)40}},
 #endif
     {NULL, NULL, OPTTYPE_BOOL, { NULL }}
 };
@@ -370,9 +370,9 @@ static void select_boolean_value(union nh_optvalue *value, struct nh_option_desc
     add_menu_txt(items, size, icount, option->helptxt, MI_TEXT);
     add_menu_txt(items, size, icount, "", MI_TEXT);
     add_menu_item(items, size, icount, 1,
-		  option->value.b ? "true (set)" : "true", 't', 0);
+		  option->value.b ? "是（已设）" : "是", 't', 0);
     add_menu_item(items, size, icount, 2,
-		  option->value.b ? "false" : "false (set)", 'f', 0);
+		  option->value.b ? "否" : "否（已设）", 'f', 0);
 
     n = curses_display_menu(items, icount, option->name, PICK_ONE, pick_list);
     free(items);
@@ -400,7 +400,7 @@ static void select_enum_value(union nh_optvalue *value, struct nh_option_desc *o
 	char capbuf[QBUFSZ];
 	char *cap;
 	if (option->value.e == option->e.choices[i].id) {
-	    snprintf(capbuf, QBUFSZ, "%s (set)", option->e.choices[i].caption);
+	    snprintf(capbuf, QBUFSZ, "%s（已设）", option->e.choices[i].caption);
 	    cap = capbuf;
 	} else {
 	    cap = option->e.choices[i].caption;
@@ -523,31 +523,31 @@ void display_options(nh_bool change_birth_opt)
 	if (!change_birth_opt) {
 	    birthoptions = nh_get_options(ACTIVE_BIRTH_OPTIONS);
 	    /* add general game options */
-	    add_menu_txt(items, size, icount, "Game options:", MI_HEADING);
+	    add_menu_txt(items, size, icount, "游戏设置：", MI_HEADING);
 	    menu_add_options(&items, &size, &icount, GAME_OPTS, nhoptions,
 				FALSE);
 	    
 	    /* add or display birth options */
-	    add_menu_txt(items, size, icount, "Birth options for this game:",
+	    add_menu_txt(items, size, icount, "本次游戏人物设置：",
 			    MI_HEADING);
 	    menu_add_options(&items, &size, &icount, ACT_BIRTH_OPTS,
 				birthoptions, TRUE);
 	} else {
 	    birthoptions = nh_get_options(CURRENT_BIRTH_OPTIONS);
 	    /* add or display birth options */
-	    add_menu_txt(items, size, icount, "Birth options:", MI_HEADING);
+	    add_menu_txt(items, size, icount, "创建人物设置：", MI_HEADING);
 	    menu_add_options(&items, &size, &icount, CUR_BIRTH_OPTS,
 				birthoptions, FALSE);
 	    
-	    add_menu_txt(items, size, icount, "Game options:", MI_HEADING);
+	    add_menu_txt(items, size, icount, "游戏设置：", MI_HEADING);
 	    menu_add_options(&items, &size, &icount, GAME_OPTS, nhoptions, FALSE);
 	}
 	
 	/* add UI specific options */
-	add_menu_txt(items, size, icount, "Interface options:", MI_HEADING);
+	add_menu_txt(items, size, icount, "界面设置：", MI_HEADING);
 	menu_add_options(&items, &size, &icount, UI_OPTS, curses_options, FALSE);
 	
-	n = curses_display_menu_core(items, icount, "Set what options?", PICK_ONE,
+	n = curses_display_menu_core(items, icount, "选择哪个设置？", PICK_ONE,
 				     NULL, 0, 0, -1, -1, get_option_value, FALSE);
     } while (n > 0);
     free(items);
@@ -566,7 +566,7 @@ void print_options(void)
     icount = 0; size = 10;
     items = malloc(sizeof(struct nh_menuitem) * size);
     
-    add_menu_txt(items, size, icount, "Birth options:", MI_HEADING);
+    add_menu_txt(items, size, icount, "创建人物设置：", MI_HEADING);
     options = nh_get_options(CURRENT_BIRTH_OPTIONS);
     for (i = 0; options[i].name; i++) {
 	snprintf(buf, BUFSZ, "%s\t%s", options[i].name, options[i].helptxt);
@@ -574,7 +574,7 @@ void print_options(void)
     }
     add_menu_txt(items, size, icount, "", MI_TEXT);
     
-    add_menu_txt(items, size, icount, "Game options:", MI_HEADING);
+    add_menu_txt(items, size, icount, "游戏设置：", MI_HEADING);
     options = nh_get_options(GAME_OPTIONS);
     for (i = 0; options[i].name; i++) {
 	snprintf(buf, BUFSZ, "%s\t%s", options[i].name, options[i].helptxt);
@@ -583,13 +583,13 @@ void print_options(void)
     add_menu_txt(items, size, icount, "", MI_TEXT);
 
     /* add UI specific options */
-    add_menu_txt(items, size, icount, "Interface options:", MI_HEADING);
+    add_menu_txt(items, size, icount, "界面设置：", MI_HEADING);
     for (i = 0; curses_options[i].name; i++) {
 	snprintf(buf, BUFSZ, "%s\t%s", curses_options[i].name, curses_options[i].helptxt);
 	add_menu_txt(items, size, icount, buf, MI_TEXT);
     }
 
-    curses_display_menu(items, icount, "Available options:", PICK_NONE, NULL);
+    curses_display_menu(items, icount, "可用选项：", PICK_NONE, NULL);
     free(items);
 }
 
@@ -598,33 +598,33 @@ void print_options(void)
 static void autopickup_rules_help(void)
 {
     struct nh_menuitem items[] = {
-	{0, MI_TEXT, "The autopickup rules are only active if autopickup is on."},
-	{0, MI_TEXT, "If autopickup is on and you walk onto an item, the item is compared"},
-	{0, MI_TEXT, "to each rule in turn until a matching rule is found."},
-	{0, MI_TEXT, "If a match is found, the action specified in that rule is taken"},
-	{0, MI_TEXT, "and no other rules are considered."},
+	{0, MI_TEXT, "自动拾取规则只有当开启自动拾取功能时生效。"},
+	{0, MI_TEXT, "当自动拾取功能开启时，你走到一件物品上方，这件物品"},
+	{0, MI_TEXT, "将与每个规则相比较，直到有一个规则满足。"},
+	{0, MI_TEXT, "如果存在一个满足的规则，与此规则相对应的动作将被执"},
+	{0, MI_TEXT, "行，然后其他的规矩将被忽略。"},
 	{0, MI_TEXT, ""},
-	{0, MI_TEXT, "Each rule may match any combination of object name, object type,"},
-	{0, MI_TEXT, "and object blessing (including unknown)."},
-	{0, MI_TEXT, "A rule that specifies none of these matches everything."},
+	{0, MI_TEXT, "每个规则都可以匹配物体名称、类型或祝福状态的任意组"},
+	{0, MI_TEXT, "何（包括未知的情况）。"},
+	{0, MI_TEXT, "可以设置一个规则来匹配任意的情况。"},
 	{0, MI_TEXT, ""},
-	{0, MI_TEXT, "Suppose your rules look like this:"},
+	{0, MI_TEXT, "加入你的匹配规则像这样："},
 	{0, MI_TEXT, " 1. IF name matches \"*lizard*\" AND type is \"food\": < GRAB"},
 	{0, MI_TEXT, " 2. IF name matches \"*corpse*\" AND type is \"food\":   LEAVE >"},
 	{0, MI_TEXT, " 3. IF type is \"food\":                             < GRAB"},
 	{0, MI_TEXT, ""},
-	{0, MI_TEXT, "A newt corpse will not match rule 1, but rule 2 applies, so"},
-	{0, MI_TEXT, "it won't be picked up and rule 3 won't be considered."},
-	{0, MI_TEXT, "(Strictly speaking, the \"type is food\" part of these rules is not"},
-	{0, MI_TEXT, "necessary; it's purpose here is to make the example more interesting.)"},
+	{0, MI_TEXT, "“newt corpse”将不满足规则1，但是会满足规则2。"},
+	{0, MI_TEXT, "它将不会被拾取，规则3也将被忽略。"},
+	{0, MI_TEXT, "（严格地说，\"type is food\"这条规则并不是必须"},
+	{0, MI_TEXT, "的；它在这只是为了让例子更有趣一些。）"},
 	{0, MI_TEXT, ""},
-	{0, MI_TEXT, "A dagger will not match any of these rules and so it won't"},
-	{0, MI_TEXT, "be picked up either."},
+	{0, MI_TEXT, "“dagger”将不会匹配上述任何一种情况，所有它将不会"},
+	{0, MI_TEXT, "被自动拾取。"},
 	{0, MI_TEXT, ""},
-	{0, MI_TEXT, "You may select any existing rule to edit it, change its position"},
-	{0, MI_TEXT, "in the list, or delete it."},
+	{0, MI_TEXT, "你可以在列表中选择一个已存在的规则来编辑它，修改它"},
+	{0, MI_TEXT, "的条件，或者删除它。"},
     };
-    curses_display_menu(items, listlen(items), "Autopickup rules help:", PICK_NONE, NULL);
+    curses_display_menu(items, listlen(items), "自动拾取规则帮助：", PICK_NONE, NULL);
 }
 
 
