@@ -896,24 +896,24 @@ static void show_autopickup_menu(struct nh_option_desc *opt)
 static void msgtype_help(void)
 {
     struct nh_menuitem items[] = {
-	{0, MI_TEXT, "Message types allow you treat certain messages shown during"},
-	{0, MI_TEXT, "the game in different ways, like pausing for input with --More--,"},
-	{0, MI_TEXT, "collapsing repeated messages or even hiding messages entirely."},
+	{0, MI_TEXT, "消息类型能让你将某些消息在游戏中以不同的方式"},
+	{0, MI_TEXT, "显示出来，像暂停等待输入 --More--，"},
+	{0, MI_TEXT, "重复崩溃的消息或者隐藏的消息入口。"},
 	{0, MI_TEXT, ""},
-	{0, MI_TEXT, "Possible actions for a matched message:"},
-	{0, MI_TEXT, "    DEFAULT    treat the message as usual"},
-	{0, MI_TEXT, "    MORE       pauses with --More-- after this message"},
-	{0, MI_TEXT, "    NO REPEAT  hides repetitions of this message"},
-	{0, MI_TEXT, "    HIDE       stops this message from being shown at all"},
+	{0, MI_TEXT, "一个匹配的消息可能的动作："},
+	{0, MI_TEXT, "    DEFAULT    视为一条普通的消息"},
+	{0, MI_TEXT, "    MORE       在这条消息之后用 --More-- 暂停"},
+	{0, MI_TEXT, "    NO REPEAT  隐藏这条消息的重复部分"},
+	{0, MI_TEXT, "    HIDE       完全隐藏这条消息"},
 	{0, MI_TEXT, ""},
-	{0, MI_TEXT, "Messages are matched in order by pattern:"},
-	{0, MI_TEXT, "    ?                    matches any one character"},
-	{0, MI_TEXT, "    *                    matches any number of characters"},
-	{0, MI_TEXT, "    any other character  matches itself"},
+	{0, MI_TEXT, "被匹配的消息的排序模式："},
+	{0, MI_TEXT, "    ?                    匹配任何单个字符"},
+	{0, MI_TEXT, "    *                    匹配任何长度的字符串"},
+	{0, MI_TEXT, "    所有其他的字符匹配它自己"},
 	{0, MI_TEXT, ""},
-	{0, MI_TEXT, "Select an existing entry to edit, reorder or delete it."},
+	{0, MI_TEXT, "选择一个已有的项来编辑，重排或者删除它。"},
     };
-    curses_display_menu(items, listlen(items), "Message types help:",
+    curses_display_menu(items, listlen(items), "消息类型帮助：",
 			PICK_NONE, NULL);
 }
 
@@ -1046,7 +1046,7 @@ static void msgtype_edit_rule(struct nh_msgtype_rules *mt_rules, int ruleno)
 		break;
 
 	    default:
-		curses_msgwin("Invalid msgtype match menu choice.");
+		curses_msgwin("无效的消息类型匹配目录选择。");
 	    }
 	}
     } while (n > 0);
